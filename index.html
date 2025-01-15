@@ -107,6 +107,9 @@
             <label>
                 <input type="checkbox" id="five-star-hotel" onchange="updatePrice()"> Upgrade to 5-Star Hotel (+RM 500)
             </label>
+            <label>
+                <input type="checkbox" id="include-transport" onchange="updatePrice()"> Include Transportation (+RM 200)
+            </label>
             
             <p>Total Price: RM <span id="total-price"></span></p>
             <button onclick="addToCart()">Add to Cart</button>
@@ -143,6 +146,11 @@
                 totalPrice += 500;
             }
 
+            // Add RM 200 if transportation is included
+            if (document.getElementById('include-transport').checked) {
+                totalPrice += 200;
+            }
+
             document.getElementById('total-price').innerText = totalPrice;
         }
 
@@ -157,6 +165,7 @@
             // Reset checkboxes and prices
             document.getElementById('include-meals').checked = true;
             document.getElementById('five-star-hotel').checked = false;
+            document.getElementById('include-transport').checked = false;
             updatePrice();
         }
     </script>
