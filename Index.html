@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Deliver Travel & Tours</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f0f0;
+        }
+        .header {
+            background-color: #007bff;
+            color: white;
+            text-align: center;
+            padding: 20px;
+            font-size: 24px;
+        }
+        .container {
+            width: 80%;
+            margin: auto;
+            padding: 20px;
+        }
+        .package-card {
+            background-color: white;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        .package-card h3 {
+            margin: 0 0 10px 0;
+        }
+        .package-card p {
+            margin: 5px 0;
+        }
+        .package-card button {
+            background-color: #007bff;
+            color: white;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .package-card button:hover {
+            background-color: #0056b3;
+        }
+        .package-detail {
+            background-color: white;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        .package-detail label {
+            display: block;
+            margin-bottom: 10px;
+        }
+        .package-detail button {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="header">
+        Deliver Travel & Tours
+    </div>
+
+    <div class="container" id="homepage">
+        <div class="package-card">
+            <h3>Hat Yai, Thailand</h3>
+            <p>Price: RM 500</p>
+            <button onclick="showDetails('Hat Yai, Thailand', 500)">View Package</button>
+        </div>
+        <div class="package-card">
+            <h3>Singapore</h3>
+            <p>Price: RM 750</p>
+            <button onclick="showDetails('Singapore', 750)">View Package</button>
+        </div>
+        <div class="package-card">
+            <h3>Bali, Indonesia</h3>
+            <p>Price: RM 1200</p>
+            <button onclick="showDetails('Bali, Indonesia', 1200)">View Package</button>
+        </div>
+        <div class="package-card">
+            <h3>Sydney, Australia</h3>
+            <p>Price: RM 3500</p>
+            <button onclick="showDetails('Sydney, Australia', 3500)">View Package</button>
+        </div>
+        <div class="package-card">
+            <h3>Seoul, South Korea</h3>
+            <p>Price: RM 4000</p>
+            <button onclick="showDetails('Seoul, South Korea', 4000)">View Package</button>
+        </div>
+    </div>
+
+    <div class="container" id="package-details" style="display: none;">
+        <div class="package-detail">
+            <h2 id="package-destination"></h2>
+            <p>Base Price: RM <span id="base-price"></span></p>
+            
+            <label>
+                <input type="checkbox" id="include-meals" onchange="updatePrice()"> Include Meals (-RM 100)
+            </label>
+            <label>
+                <input type="checkbox" id="five-star-hotel" onchange="updatePrice()"> Upgrade to 5-Star Hotel (+RM 500)
+            </label>
+            
+            <p>Total Price: RM <span id="total-price"></span></p>
+            <button onclick="addToCart()">Add to Cart</button>
+            <button onclick="goBack()">Go Back</button>
+        </div>
+    </div>
+
+    <script>
+        let basePrice = 0;
+        let totalPrice = 0;
+
+        function showDetails(destination, price) {
+            document.getElementById('homepage').style.display = 'none';
+            document.getElementById('package-details').style.display = 'block';
+
+            document.getElementById('package-destination').innerText = destination;
+            document.getElementById('base-price').innerText = price;
+            document.getElementById('total-price').innerText = price;
+
+            basePrice = price;
+            totalPrice = price;
+        }
+
+        function updatePrice() {
+            totalPrice = basePrice;
+            
+            // Subtract RM 100 if meals are not included
+            if (!document.getElementById('include-meals').checked) {
+                totalPrice -= 100;
+            }
+            
+            // Add RM 500 if the user chooses a 5-star hotel
+            if (document.getElementById('five-star-hotel').checked) {
+                totalPrice += 500;
+            }
+
+            document.getElementById('total-price').innerText = totalPrice;
+        }
+
+        function addToCart() {
+            alert('Package added to cart with a total price of RM ' + totalPrice);
+        }
+
+        function goBack() {
+            document.getElementById('homepage').style.display = 'block';
+            document.getElementById('package-details').style.display = 'none';
+
+            // Reset checkboxes and prices
+            document.getElementById('include-meals').checked = true;
+            document.getElementById('five-star-hotel').checked = false;
+            updatePrice();
+        }
+    </script>
+
+</body>
+</html>
