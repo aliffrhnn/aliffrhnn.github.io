@@ -29,6 +29,13 @@
             margin-bottom: 20px;
             border-radius: 5px;
             box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            display: flex;
+        }
+        .package-card img {
+            width: 200px;
+            height: 150px;
+            margin-right: 20px;
+            border-radius: 5px;
         }
         .package-card h3 {
             margin: 0 0 10px 0;
@@ -60,6 +67,18 @@
         .package-detail button {
             margin-top: 20px;
         }
+        .itinerary {
+            margin-top: 20px;
+            background-color: #e8e8e8;
+            padding: 10px;
+            border-radius: 5px;
+        }
+        .itinerary h4 {
+            margin: 0 0 10px 0;
+        }
+        .itinerary ul {
+            padding-left: 20px;
+        }
     </style>
 </head>
 <body>
@@ -70,29 +89,44 @@
 
     <div class="container" id="homepage">
         <div class="package-card">
-            <h3>Hat Yai, Thailand</h3>
-            <p>Price: RM 500</p>
-            <button onclick="showDetails('Hat Yai, Thailand', 500)">View Package</button>
+            <img src="https://mediaim.expedia.com/destination/1/19e1b39e2b871052008bc2a4011f5937.jpg" alt="Hat Yai, Thailand">
+            <div>
+                <h3>Hat Yai, Thailand</h3>
+                <p>Price: RM 500</p>
+                <button onclick="showDetails('Hat Yai, Thailand', 500, 'hatyai')">View Package</button>
+            </div>
         </div>
         <div class="package-card">
-            <h3>Singapore</h3>
-            <p>Price: RM 750</p>
-            <button onclick="showDetails('Singapore', 750)">View Package</button>
+            <img src="https://a.travel-assets.com/findyours-php/viewfinder/images/res70/542000/542607-singapore.jpg" alt="Singapore">
+            <div>
+                <h3>Singapore</h3>
+                <p>Price: RM 750</p>
+                <button onclick="showDetails('Singapore', 750, 'singapore')">View Package</button>
+            </div>
         </div>
         <div class="package-card">
-            <h3>Bali, Indonesia</h3>
-            <p>Price: RM 1200</p>
-            <button onclick="showDetails('Bali, Indonesia', 1200)">View Package</button>
+            <img src="https://media.cntravellerme.com/photos/64e73087238bdd124237b565/16:9/w_6016,h_3384,c_limit/GettyImages-1145042281.jpeg" alt="Bali, Indonesia">
+            <div>
+                <h3>Bali, Indonesia</h3>
+                <p>Price: RM 1200</p>
+                <button onclick="showDetails('Bali, Indonesia', 1200, 'bali')">View Package</button>
+            </div>
         </div>
         <div class="package-card">
-            <h3>Sydney, Australia</h3>
-            <p>Price: RM 3500</p>
-            <button onclick="showDetails('Sydney, Australia', 3500)">View Package</button>
+            <img src="https://cdn.britannica.com/71/188471-050-CF188A6B/Sydney-Opera-House-Port-Jackson.jpg" alt="Sydney, Australia">
+            <div>
+                <h3>Sydney, Australia</h3>
+                <p>Price: RM 3500</p>
+                <button onclick="showDetails('Sydney, Australia', 3500, 'sydney')">View Package</button>
+            </div>
         </div>
         <div class="package-card">
-            <h3>Seoul, South Korea</h3>
-            <p>Price: RM 4000</p>
-            <button onclick="showDetails('Seoul, South Korea', 4000)">View Package</button>
+            <img src="https://www.agoda.com/wp-content/uploads/2024/04/Featured-image-Han-River-at-night-in-Seoul-South-Korea.jpg" alt="Seoul, South Korea">
+            <div>
+                <h3>Seoul, South Korea</h3>
+                <p>Price: RM 4000</p>
+                <button onclick="showDetails('Seoul, South Korea', 4000, 'seoul')">View Package</button>
+            </div>
         </div>
     </div>
 
@@ -102,7 +136,7 @@
             <p>Base Price: RM <span id="base-price"></span></p>
             
             <label>
-                <input type="checkbox" id="include-meals" onchange="updatePrice()"> Include Meals (+RM 100)
+                <input type="checkbox" id="include-meals" onchange="updatePrice()"> Include Meals (-RM 100)
             </label>
             <label>
                 <input type="checkbox" id="five-star-hotel" onchange="updatePrice()"> Upgrade to 5-Star Hotel (+RM 500)
@@ -112,6 +146,9 @@
             </label>
             
             <p>Total Price: RM <span id="total-price"></span></p>
+
+            <div class="itinerary" id="itinerary"></div>
+
             <button onclick="addToCart()">Add to Cart</button>
             <button onclick="goBack()">Go Back</button>
         </div>
@@ -121,7 +158,54 @@
         let basePrice = 0;
         let totalPrice = 0;
 
-        function showDetails(destination, price) {
+        const itineraries = {
+            hatyai: `
+                <h4>3 Days, 2 Nights Brief Itinerary for Hat Yai</h4>
+                <ul>
+                    <li>Day 1: Arrival, Local Tour, Night Market</li>
+                    <li>Day 2: Island tour, Floating Market Visit</li>
+                    <li>Day 3: Shopping and Departure</li>
+                </ul>
+            `,
+            singapore: `
+                <h4>3 Days, 2 Nights Brief Itinerary for Singapore</h4>
+                <ul>
+                    <li>Day 1: Arrival, City Tour, Marina Bay Sands</li>
+                    <li>Day 2: Sentosa Island, Universal Studios</li>
+                    <li>Day 3: Gardens by the Bay, Shopping, and Departure</li>
+                </ul>
+            `,
+            bali: `
+                <h4>3 Days, 2 Nights Brief Itinerary for Bali</h4>
+                <ul>
+                    <li>Day 1: Arrival, Beach Tour, Temple Visit</li>
+                    <li>Day 2: Ubud tour, traditional dance performance</li>
+                    <li>Day 3: Shopping and Departure</li>
+                </ul>
+            `,
+            sydney: `
+                <h4>5 Days, 4 Nights Brief Itinerary for Sydney</h4>
+                <ul>
+                    <li>Day 1: Arrival, City Tour, Opera House Visit</li>
+                    <li>Day 2: Blue Mountains Tour</li>
+                    <li>Day 3: Bondi Beach and Wildlife Park</li>
+                    <li>Day 4: Sydney Harbour cruise, Taronga Zoo</li>
+                    <li>Day 5: Shopping and Departure</li>
+                </ul>
+            `,
+            seoul: `
+                <h4>5 Days, 4 Nights Brief Itinerary for Seoul</h4>
+                <ul>
+                    <li>Day 1: Arrival, City Tour, Naksan Seoul Tower</li>
+                    <li>Day 2: Gyeongbokgung Palace, Insadong</li>
+                    <li>Day 3: Nami Island and Petite France</li>
+                    <li>Day 4: Myeongdong Shopping, Lotte World</li>
+                    <li>Day 5: Han River cruise, Departure</li>
+                </ul>
+            `
+        };
+
+        function showDetails(destination, price, itineraryKey) {
             document.getElementById('homepage').style.display = 'none';
             document.getElementById('package-details').style.display = 'block';
 
@@ -131,6 +215,9 @@
 
             basePrice = price;
             totalPrice = price;
+
+            // Display the itinerary
+            document.getElementById('itinerary').innerHTML = itineraries[itineraryKey];
         }
 
         function updatePrice() {
