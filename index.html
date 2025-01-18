@@ -230,6 +230,9 @@
             <label>
                 <input type="checkbox" id="include-transport" onchange="updatePrice()"> Include Transportation (+RM 200)
             </label>
+            <label>
+                <input type="checkbox" id="include-travel-insurance" onchange="updatePrice()"> Include Travel Insurance (+RM 150)
+            </label>
             <p>Total Price: RM <span id="total-price"></span></p>
             <button onclick="addToCart()">Add to Cart</button>
         </div>
@@ -322,6 +325,9 @@
             }
             if (document.getElementById('include-transport').checked) {
                 total += 200;
+                 }
+            if (document.getElementById('include-travel-insurance').checked) {
+                total += 150;
             }
             document.getElementById('total-price').textContent = total;
         }
