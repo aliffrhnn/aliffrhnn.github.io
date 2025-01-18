@@ -12,16 +12,59 @@
             background-color: #f0f0f0;
         }
         .header {
-            background-color: #007bff;
+            background-color: #d47a19;
+            color: white;
+            padding: 10px 20px;
+            text-align: center;
+        }
+        .navbar {
+            overflow: hidden;
+            background-color: #333;
+        }
+        .navbar a {
+            float: left;
+            display: block;
             color: white;
             text-align: center;
-            padding: 20px;
-            font-size: 24px;
+            padding: 14px 20px;
+            text-decoration: none;
+        }
+        .navbar a:hover {
+            background-color: #ddd;
+            color: black;
         }
         .container {
             width: 80%;
             margin: auto;
             padding: 20px;
+        }
+        .logo {
+            text-align: center;
+            margin-top: 20px;
+        }
+        .logo img {
+            width: 200px;
+            height: auto;
+        }
+        .about-us {
+            background-color: white;
+            padding: 20px;
+            margin-top: 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            margin-top: 20px;
+        }
+        .gallery img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
         }
         .package-card {
             background-color: white;
@@ -83,60 +126,103 @@
 </head>
 <body>
 
+    <!-- Header and Navbar -->
     <div class="header">
-        Deliver Travel & Tours
+        <h1>Deliver Travel & Tours</h1>
     </div>
 
+    <div class="navbar">
+        <a href="#" onclick="showHomePage()">Home</a>
+        <a href="#" onclick="showPackagesPage()">Packages</a>
+    </div>
+
+    <!-- Home Page Content -->
     <div class="container" id="homepage">
+        <!-- Logo -->
+        <div class="logo">
+            <img src="https://www.delivertravelandtours.com/wp-content/uploads/2020/02/DTT.png" alt="Company Logo"> <!-- Replace with your logo URL -->
+        </div>
+
+        <!-- About Us Section -->
+        <div class="about-us">
+            <h2>About Us</h2>
+            <p>At Deliver Travel & Tours, we are passionate about crafting memorable travel experiences for our clients. Based in Malaysia, we specialize in providing diverse and customizable travel packages to top destinations across Asia and beyond. Whether you seek adventure, relaxation, or cultural exploration, our team is dedicated to ensuring that every journey is tailored to meet your preferences, offering the perfect balance of convenience, comfort, and value.</p>
+        </div>
+
+        <!-- Image Gallery -->
+        <div class="gallery">
+            <img src="https://dynamic-media-cdn.tripadvisor.com/media/photo-o/29/d6/c6/f8/caption.jpg?w=1400&h=1400&s=1&cx=989&cy=446&chk=v1_05762c604da56e26277e" alt="Travel Image 1"> <!-- Replace with your image URLs -->
+            <img src="https://cdn1.matadornetwork.com/blogs/1/2019/06/Restaurants-on-the-boats-at-the-evening-floating-food-market-in-Hat-Yai-Thailand-1200x853.jpg" alt="Travel Image 2">
+            <img src="https://www.civitatis.com/blog/wp-content/uploads/2024/04/shutterstock_581721256-scaled.jpg" alt="Travel Image 3">
+            <img src="https://www.executivecentre.com/_next/image/?url=https%3A%2F%2Fassets.executivecentre.com%2Fassets%2F2018-07-blog-header.jpg&w=3840&q=75" alt="Travel Image 4">
+            <img src="https://i.natgeofe.com/k/95d61645-a0c7-470f-b198-74a399dd5dfb/singapore-city_2x1.jpg" alt="Travel Image 5">
+            <img src="https://www.pelago.com/img/destinations/bali/0619-0941_bali.jpg" alt="Travel Image 6">
+        </div>
+    </div>
+
+    <!-- Packages Page Content (Initially Hidden) -->
+    <div class="container" id="packages-page" style="display: none;">
+        <h2>Our Travel Packages</h2>
+
+        <!-- Packages Display -->
         <div class="package-card">
-            <img src="https://mediaim.expedia.com/destination/1/19e1b39e2b871052008bc2a4011f5937.jpg" alt="Hat Yai, Thailand">
+            <img src="https://ik.imagekit.io/tvlk/xpe-asset/AyJ40ZAo1DOyPyKLZ9c3RGQHTP2oT4ZXW+QmPVVkFQiXFSv42UaHGzSmaSzQ8DO5QIbWPZuF+VkYVRk6gh-Vg4ECbfuQRQ4pHjWJ5Rmbtkk=/4812973790679/Hat-Yai-City-Floating-Market-Evening-Private-Tour-Thailand-6d062c42-7a74-406d-b8f8-2f3eec3fab74.jpeg?tr=q-60,c-at_max,w-1280,h-720&_src=imagekit" alt="Hat Yai">
             <div>
                 <h3>Hat Yai, Thailand</h3>
-                <p>Price: RM 500</p>
-                <button onclick="showDetails('Hat Yai, Thailand', 500, 'hatyai')">View Package</button>
+                <p>Price: RM 1500</p>
+                <p>3 Days, 2 Nights</p>
+                <button onclick="showPackageDetails('Hat Yai', 1500, '3 Days, 2 Nights')">View Details</button>
             </div>
         </div>
+
         <div class="package-card">
-            <img src="https://a.travel-assets.com/findyours-php/viewfinder/images/res70/542000/542607-singapore.jpg" alt="Singapore">
+            <img src="https://i.natgeofe.com/k/95d61645-a0c7-470f-b198-74a399dd5dfb/singapore-city_2x1.jpg" alt="Singapore">
             <div>
                 <h3>Singapore</h3>
-                <p>Price: RM 750</p>
-                <button onclick="showDetails('Singapore', 750, 'singapore')">View Package</button>
+                <p>Price: RM 2000</p>
+                <p>3 Days, 2 Nights</p>
+                <button onclick="showPackageDetails('Singapore', 2000, '3 Days, 2 Nights')">View Details</button>
             </div>
         </div>
+
         <div class="package-card">
-            <img src="https://media.cntravellerme.com/photos/64e73087238bdd124237b565/16:9/w_6016,h_3384,c_limit/GettyImages-1145042281.jpeg" alt="Bali, Indonesia">
+            <img src="https://media.cntravellerme.com/photos/64e73087238bdd124237b565/16:9/w_6016,h_3384,c_limit/GettyImages-1145042281.jpeg" alt="Bali">
             <div>
                 <h3>Bali, Indonesia</h3>
-                <p>Price: RM 1200</p>
-                <button onclick="showDetails('Bali, Indonesia', 1200, 'bali')">View Package</button>
+                <p>Price: RM 2500</p>
+                <p>3 Days, 2 Nights</p>
+                <button onclick="showPackageDetails('Bali', 2500, '3 Days, 2 Nights')">View Details</button>
             </div>
         </div>
+
         <div class="package-card">
-            <img src="https://cdn.britannica.com/71/188471-050-CF188A6B/Sydney-Opera-House-Port-Jackson.jpg" alt="Sydney, Australia">
+            <img src="https://cdn.britannica.com/71/188471-050-CF188A6B/Sydney-Opera-House-Port-Jackson.jpg" alt="Sydney">
             <div>
                 <h3>Sydney, Australia</h3>
-                <p>Price: RM 3500</p>
-                <button onclick="showDetails('Sydney, Australia', 3500, 'sydney')">View Package</button>
+                <p>Price: RM 5000</p>
+                <p>5 Days, 4 Nights</p>
+                <button onclick="showPackageDetails('Sydney', 5000, '5 Days, 4 Nights')">View Details</button>
             </div>
         </div>
+
         <div class="package-card">
-            <img src="https://www.agoda.com/wp-content/uploads/2024/04/Featured-image-Han-River-at-night-in-Seoul-South-Korea.jpg" alt="Seoul, South Korea">
+            <img src="https://media.cntraveler.com/photos/5a6f78b7abbf37393aaae64a/16:9/w_1280,c_limit/Insadong-GettyImages-691361168.jpg" alt="Seoul">
             <div>
                 <h3>Seoul, South Korea</h3>
-                <p>Price: RM 4000</p>
-                <button onclick="showDetails('Seoul, South Korea', 4000, 'seoul')">View Package</button>
+                <p>Price: RM 5500</p>
+                <p>5 Days, 4 Nights</p>
+                <button onclick="showPackageDetails('Seoul', 5500, '5 Days, 4 Nights')">View Details</button>
             </div>
         </div>
     </div>
 
+    <!-- Package Details Section -->
     <div class="container" id="package-details" style="display: none;">
+        <h2 id="package-title">Package Details</h2>
+        <p id="package-itinerary"></p>
         <div class="package-detail">
-            <h2 id="package-destination"></h2>
-            <p>Base Price: RM <span id="base-price"></span></p>
-            
             <label>
-                <input type="checkbox" id="include-meals" onchange="updatePrice()"> Include Meals (-RM 100)
+                <input type="checkbox" id="include-meals" checked onchange="updatePrice()"> Include Meals (+RM 150)
             </label>
             <label>
                 <input type="checkbox" id="five-star-hotel" onchange="updatePrice()"> Upgrade to 5-Star Hotel (+RM 500)
@@ -144,118 +230,107 @@
             <label>
                 <input type="checkbox" id="include-transport" onchange="updatePrice()"> Include Transportation (+RM 200)
             </label>
-            
             <p>Total Price: RM <span id="total-price"></span></p>
-
-            <div class="itinerary" id="itinerary"></div>
-
             <button onclick="addToCart()">Add to Cart</button>
-            <button onclick="goBack()">Go Back</button>
         </div>
+
+        <!-- Itinerary Section -->
+        <div class="itinerary" id="itinerary"></div>
+
     </div>
 
     <script>
         let basePrice = 0;
-        let totalPrice = 0;
 
-        const itineraries = {
-            hatyai: `
-                <h4>3 Days, 2 Nights Brief Itinerary for Hat Yai</h4>
-                <ul>
-                    <li>Day 1: Arrival, Local Tour, Night Market</li>
-                    <li>Day 2: Island tour, Floating Market Visit</li>
-                    <li>Day 3: Shopping and Departure</li>
-                </ul>
-            `,
-            singapore: `
-                <h4>3 Days, 2 Nights Brief Itinerary for Singapore</h4>
-                <ul>
-                    <li>Day 1: Arrival, City Tour, Marina Bay Sands</li>
-                    <li>Day 2: Sentosa Island, Universal Studios</li>
-                    <li>Day 3: Gardens by the Bay, Shopping, and Departure</li>
-                </ul>
-            `,
-            bali: `
-                <h4>3 Days, 2 Nights Brief Itinerary for Bali</h4>
-                <ul>
-                    <li>Day 1: Arrival, Beach Tour, Temple Visit</li>
-                    <li>Day 2: Ubud tour, traditional dance performance</li>
-                    <li>Day 3: Shopping and Departure</li>
-                </ul>
-            `,
-            sydney: `
-                <h4>5 Days, 4 Nights Brief Itinerary for Sydney</h4>
-                <ul>
-                    <li>Day 1: Arrival, City Tour, Opera House Visit</li>
-                    <li>Day 2: Blue Mountains Tour</li>
-                    <li>Day 3: Bondi Beach and Wildlife Park</li>
-                    <li>Day 4: Sydney Harbour cruise, Taronga Zoo</li>
-                    <li>Day 5: Shopping and Departure</li>
-                </ul>
-            `,
-            seoul: `
-                <h4>5 Days, 4 Nights Brief Itinerary for Seoul</h4>
-                <ul>
-                    <li>Day 1: Arrival, City Tour, Naksan Seoul Tower</li>
-                    <li>Day 2: Gyeongbokgung Palace, Insadong</li>
-                    <li>Day 3: Nami Island and Petite France</li>
-                    <li>Day 4: Myeongdong Shopping, Lotte World</li>
-                    <li>Day 5: Han River cruise, Departure</li>
-                </ul>
-            `
-        };
+        function showHomePage() {
+            document.getElementById('homepage').style.display = 'block';
+            document.getElementById('packages-page').style.display = 'none';
+            document.getElementById('package-details').style.display = 'none';
+        }
 
-        function showDetails(destination, price, itineraryKey) {
+        function showPackagesPage() {
             document.getElementById('homepage').style.display = 'none';
+            document.getElementById('packages-page').style.display = 'block';
+            document.getElementById('package-details').style.display = 'none';
+        }
+
+        function showPackageDetails(title, price, itinerary) {
+            document.getElementById('homepage').style.display = 'none';
+            document.getElementById('packages-page').style.display = 'none';
             document.getElementById('package-details').style.display = 'block';
-
-            document.getElementById('package-destination').innerText = destination;
-            document.getElementById('base-price').innerText = price;
-            document.getElementById('total-price').innerText = price;
-
+            document.getElementById('package-title').textContent = title;
             basePrice = price;
-            totalPrice = price;
+            document.getElementById('total-price').textContent = basePrice;
 
-            // Display the itinerary
-            document.getElementById('itinerary').innerHTML = itineraries[itineraryKey];
+            let itineraryHtml = '';
+            if (title === 'Hat Yai') {
+                itineraryHtml = `
+                    <h4>Full Itinerary for Hat Yai, Thailand (3 Days, 2 Nights)</h4>
+                    <ul>
+                        <li>Day 1: Arrival, Hotel check-in, and free time for local exploration.</li>
+                        <li>Day 2: City tour to local markets, temples, and Songkhla Lake.</li>
+                        <li>Day 3: Morning free time, Check-out, and Departure.</li>
+                    </ul>`;
+            } else if (title === 'Singapore') {
+                itineraryHtml = `
+                    <h4>Full Itinerary for Singapore (3 Days, 2 Nights)</h4>
+                    <ul>
+                        <li>Day 1: Arrival, Hotel check-in, evening Marina Bay Sands and Gardens by the Bay.</li>
+                        <li>Day 2: Full day Sentosa Island tour, Universal Studios (optional).</li>
+                        <li>Day 3: Visit Chinatown, free time for shopping, and Departure.</li>
+                    </ul>`;
+            } else if (title === 'Bali') {
+                itineraryHtml = `
+                    <h4>Full Itinerary for Bali, Indonesia (3 Days, 2 Nights)</h4>
+                    <ul>
+                        <li>Day 1: Arrival, Hotel check-in, Tanah Lot Temple visit at sunset.</li>
+                        <li>Day 2: Full-day Kintamani tour with Ubud, Tegallalang Rice Terrace, and Monkey Forest.</li>
+                        <li>Day 3: Morning free time, Check-out, and Departure.</li>
+                    </ul>`;
+            } else if (title === 'Sydney') {
+                itineraryHtml = `
+                    <h4>Full Itinerary for Sydney, Australia (5 Days, 4 Nights)</h4>
+                    <ul>
+                        <li>Day 1: Arrival, Hotel Check-in, and explore Sydney Harbour.</li>
+                        <li>Day 2: Sydney Opera House tour and The Rocks district exploration.</li>
+                        <li>Day 3: Day trip to Blue Mountains National Park.</li>
+                        <li>Day 4: Bondi Beach and free time for shopping.</li>
+                        <li>Day 5: Departure.</li>
+                    </ul>`;
+            } else if (title === 'Seoul') {
+                itineraryHtml = `
+                    <h4>Full Itinerary for Seoul, South Korea (5 Days, 4 Nights)</h4>
+                    <ul>
+                        <li>Day 1: Arrival, Hotel check-in, and explore Myeongdong Shopping Street.</li>
+                        <li>Day 2: Gyeongbokgung Palace, Bukchon Hanok Village, and N Seoul Tower.</li>
+                        <li>Day 3: Day trip to Nami Island and Petite France.</li>
+                        <li>Day 4: Visit to Dongdaemun Design Plaza and Insa-dong.</li>
+                        <li>Day 5: Departure.</li>
+                    </ul>`;
+            }
+
+            document.getElementById('itinerary').innerHTML = itineraryHtml;
         }
 
         function updatePrice() {
-            totalPrice = basePrice;
-            
-            // Subtract RM 100 if meals are not included
+            let total = basePrice;
             if (!document.getElementById('include-meals').checked) {
-                totalPrice -= 100;
+                total += 200;
             }
-            
-            // Add RM 500 if the user chooses a 5-star hotel
             if (document.getElementById('five-star-hotel').checked) {
-                totalPrice += 500;
+                total += 500;
             }
-
-            // Add RM 200 if transportation is included
             if (document.getElementById('include-transport').checked) {
-                totalPrice += 200;
+                total += 200;
             }
-
-            document.getElementById('total-price').innerText = totalPrice;
+            document.getElementById('total-price').textContent = total;
         }
 
         function addToCart() {
-            alert('Package added to cart with a total price of RM ' + totalPrice);
-        }
-
-        function goBack() {
-            document.getElementById('homepage').style.display = 'block';
-            document.getElementById('package-details').style.display = 'none';
-
-            // Reset checkboxes and prices
-            document.getElementById('include-meals').checked = true;
-            document.getElementById('five-star-hotel').checked = false;
-            document.getElementById('include-transport').checked = false;
-            updatePrice();
+            alert("Package added to cart!");
         }
     </script>
 
 </body>
 </html>
+
